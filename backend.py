@@ -21,7 +21,7 @@ def process_question():
     print(result)
 
     # Return the result as JSON
-    return jsonify({'result': result})
+    return jsonify(result)
 
 def run_curl_command(question):
     # Define the curl command
