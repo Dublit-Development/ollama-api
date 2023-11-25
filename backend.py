@@ -30,10 +30,13 @@ def run_curl_command(question):
     # Run the command and capture the output
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
-    # Process the output as JSON
-    responses = [json.loads(response) for response in output.strip().split('\n')]
+    # Process the output as JSON and extract "response" values
+    responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
 
-    return responses
+    # Create a JSON containing only "response" values
+    response_json = {'responses': responses}
+
+    return response_json
 
 app.run(host='0.0.0.0', port=5000, debug=True)
 
