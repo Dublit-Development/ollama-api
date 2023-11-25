@@ -31,7 +31,7 @@ def run_curl_command(question):
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
     # Process the output as JSON
-    responses = [json.loads(response) for response in output.strip()]
+    responses = [json.loads(response) for response in output.strip().split('\n')]
 
     return responses
 
