@@ -31,9 +31,16 @@ def run_curl_command(question):
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
     # Process the output as JSON
-    responses = [json.loads(response) for response in output.strip().split('\n')]
+    responses = json.loads(output)
+    anythin = {}
 
-    return responses
+    # Access the "response" field in each entry
+    for entry in responses:
+        response_value = entry.get('response')
+        anythin.append(response_value)
+
+
+    return anythin
 
 app.run(host='0.0.0.0', port=5000, debug=True)
 
