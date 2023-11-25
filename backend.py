@@ -18,7 +18,7 @@ def process_question():
     # Run a command and capture the output
     result = run_curl_command(question)
 
-    print (result)
+    print(result["response"])
 
     # Return the result as JSON
     return jsonify({'result': result})
@@ -31,7 +31,7 @@ def run_curl_command(question):
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
     # Process the output as JSON
-    responses = [json.loads(response) for response in output.strip().split('\n')]
+    responses = [json.loads(response) for response in output.strip()]
 
     return responses
 
