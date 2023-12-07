@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import subprocess
 import json
 
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,27 +15,32 @@ def process_question():
     # Get the question from the request
     data = request.get_json()
     question = data.get('question', '')
+    model = data.get('model', '')
 
     # Run a command and capture the output
-    result = run_curl_command(question)
+    result = run_curl_command(question, model)
 
     print(result)
 
     # Return the result as JSON
-    return jsonify({'result': result})
+    return jsonify(result)
 
-def run_curl_command(question):
+def run_curl_command(question, model):
     # Define the curl command
-    curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "llama2", "prompt": "{question}"}}\''
+    curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{question}"}}\''
 
     # Run the command and capture the output
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
-    # Process the output as JSON
-    responses = [json.loads(response) for response in output.strip().split('\n')]
+    # Process the output as JSON and extract "response" values
+    responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
 
-    return responses
+    # Create a JSON containing only "response" values
+    response_json = {'responses': responses}
 
-app.run(host='0.0.0.0', port=5000, debug=True)
+    return response_json
 
+def run_api():
+    app.run(host='0.0.0.0', port=5001, debug=True)
 
+run_api()
