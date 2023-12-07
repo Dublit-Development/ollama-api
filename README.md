@@ -1,12 +1,27 @@
-# Ollama-API
-This is a script file to run a test example of running an API connection from Replit to Valdi
+# Ollama API: A backend service to stream Ollama model responses
+Ollama is a fantastic software that allows you to get up and running open-source LLM models quickly. Credits to the team and contributors at Ollama for building such a great software.  The goal of this repository is spin up a version of Ollama running on your HPC / Cloud Service Provider of choice and still interact with the API.
 
-# Pre reqs
-sudo apt-get update
+## Support Ollama
+[Github](https://github.com/jmorganca/ollama)
+[Website](https://ollama.ai/)
 
-sudo apt-get install python3-pip
+## Current Product
+We only support python based responses using a simple Flask Route API running on a Linux platform.
 
+## Roadmap
+- **Apach Support**:  We plan to support a production service API using WSGI
+- **Multi Language** Adding support for additional languages using a REST service
+- **Docker** Ensure deployment is seamless and simple using docker
 
-# The following libraries need to be installed using pip:
+## How to Install
 
+#### Prerequisites
+You may need to run the following commands on your Linux Server before getting started with the scripts.
+
+```sh
+sudo apt-get update 
+sudo apt-get install python3-pip 
 pip install Flask requests
+```
+--
+Created by [Dublit](https://dublit.org/) - Delivering Ollama to the masses
