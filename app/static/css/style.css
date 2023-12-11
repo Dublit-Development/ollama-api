@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    background-color: #222222;
+    font-family: 'Courier New', monospace;
+    color: #fffdfa;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.terminal {
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.prompt {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    line-height: 1.5;
+    animation: blinkCursor 1s infinite;
+}
+
+.blink {
+    animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% {
+        border-right: 2px solid #fff;
+    }
+    50% {
+        border-right: 2px solid transparent;
+    }
+}
+
+/* Position the "Made with love by Dublit" message */
+.love-message {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* Style the heart icon */
+.heart {
+    color: red;
+}
