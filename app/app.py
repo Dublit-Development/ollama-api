@@ -58,7 +58,7 @@ def process_question():
 
 @app.route('/api/pull', methods=['POST'])
 def pull_model():
-    data = request.get_json
+    data = request.get_json()
     model = data.get('model', '')
 
     result = run_pull_model(model)
@@ -68,7 +68,7 @@ def pull_model():
 
 @app.route('/api/delete', methods=['DELETE'])
 def delete_model():
-    data = request.get_json
+    data = request.get_json()
     model = data.get('model', '')
 
     result = run_delete_model(model)
