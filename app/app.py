@@ -110,6 +110,18 @@ def run_model_question(question, model):
 
     return response_json
 
+def working_directory():
+    
+    # Get the current working directory
+    current_directory = os.getcwd()
+
+    # Define the file name you are looking for
+    file_to_find = "config.json"
+
+    # Contruct the full path to the file
+    file_path = os.path.join(current_directory, file_to_find)
+
+    return file_path
 
 ##################################################
 # Utils
@@ -207,7 +219,7 @@ class EngineManager(object):
 
 # Load and parse the config file:
 try:
-    config_file = open('./app/config.json', 'r')
+    config_file = open(working_directory), 'r')
 except:
     sys.exit('config.json not found.')
 
