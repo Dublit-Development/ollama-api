@@ -79,9 +79,9 @@ def delete_model():
 app.route('/api/install', methods=['GET'])
 def install():
     
-    install_ollama()
+    response = install_ollama()
+    print(response)
     
-
 ######  FUNCTIONS   ######
 def run_delete_model(model):
     # Define the curl command
@@ -139,7 +139,9 @@ def install_ollama():
         return "Success"
 
     except subprocess.CalledProcessError as e:
-        print(f"Error downloading Ollama: {e}")
+        # print(f"Error downloading Ollama: {e}")
+        return e
+
 ##################################################
 # Utils
 
