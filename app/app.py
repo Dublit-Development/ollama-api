@@ -66,7 +66,7 @@ def pull_model():
 
     return jsonify(result)
 
-@app.route('api/delete', methods=['DELETE'])
+@app.route('/api/delete', methods=['DELETE'])
 def delete_model():
     data = request.get_json
     model = data.get('model', '')
