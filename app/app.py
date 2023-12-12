@@ -94,7 +94,7 @@ def run_delete_model(model):
 
 def run_pull_model(model):
     # Define the curl command
-    curl_command = f'curl http://localhost:11434/api/pull -d \'{"name": "{model}"}\''
+    curl_command = f'curl http://localhost:11434/api/pull -d \'{{"name": "{model}"}}\''
 
     # Run the command and capture the output
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
