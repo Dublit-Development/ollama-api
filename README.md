@@ -22,6 +22,11 @@ You may need to run the following commands on your Linux Server before getting s
 sudo apt-get update 
 sudo apt-get install python3-pip 
 pip install Flask requests
+pip install pillow
+pip install torch
+pip install diffusers
+pip install transformers
+pip install accelerate
 ```
 --
 Created by [Dublit](https://dublit.org/) - Delivering Ollama to the masses

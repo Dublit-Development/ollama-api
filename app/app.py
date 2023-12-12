@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import subprocess
+import subprocess, sys
 import json
 import re
 import sys
@@ -9,7 +9,6 @@ from io import BytesIO
 import torch
 import diffusers
 import os
-import sys
 
 
 app = Flask(__name__)
@@ -51,14 +50,52 @@ def process_question():
     model = data.get('model', '')
 
     # Run a command and capture the output
-    result = run_curl_command(question, model)
-
+    result = run_model_question(question, model)
     print(result)
 
     # Return the result as JSON
     return jsonify(result)
 
-def run_curl_command(question, model):
+@app.route('/api/pull', methods=['POST'])
+def pull_model():
+    data = request.get_json
+    model = data.get('model', '')
+
+    result = run_pull_model(model)
+    print(result)
+
+    return jsonify(result)
+
+@app.route('api/delete', methods=['DELETE'])
+def delete_model():
+    data = request.get_json
+    model = data.get('model', '')
+
+    result = run_delete_model(model)
+    print(result)
+
+    return jsonify(result)
+
+def run_delete_model(model):
+    # Define the curl command
+    curl_command = f'curl -X DELETE http://localhost:11434/api/delete -d \'{"name": "{model}"}\''
+
+    output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
+
+    response = json.loads(output)
+    return response
+
+def run_pull_model(model):
+    # Define the curl command
+    curl_command = f'curl http://localhost:11434/api/pull -d \'{"name": "{model}"}\''
+
+    # Run the command and capture the output
+    output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
+
+    response = json.loads(output)
+    return response
+
+def run_model_question(question, model):
     # Define the curl command
     curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{question}"}}\''
 
@@ -170,7 +207,7 @@ class EngineManager(object):
 
 # Load and parse the config file:
 try:
-    config_file = open('valdi-api/app/config.json', 'r')
+    config_file = open('./app/config.json', 'r')
 except:
     sys.exit('config.json not found.')
 
@@ -289,6 +326,6 @@ def _generate(task, engine=None):
     return jsonify( output_data )
 
 def run_api():
-    app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
 
 run_api()
