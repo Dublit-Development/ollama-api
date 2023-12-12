@@ -76,6 +76,13 @@ def delete_model():
 
     return jsonify(result)
 
+app.route('/api/install', methods=['POST'])
+def install():
+    
+    install_ollama()
+    
+
+######  FUNCTIONS   ######
 def run_delete_model(model):
     # Define the curl command
     curl_command = f'curl -X DELETE http://localhost:11434/api/delete -d \'{"name": "{model}"}\''
@@ -123,6 +130,16 @@ def working_directory():
 
     return file_path
 
+def install_ollama():
+    try:
+        curl_command = 'curl https://ollama.ai/install.sh | sh'
+        # Use curl to install latest Ollama package
+        subprocess.check_call(curl_command, shell=True, encoding='utf-8')
+        
+        return "Success"
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error downloading Ollama: {e}")
 ##################################################
 # Utils
 
