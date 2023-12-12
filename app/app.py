@@ -76,12 +76,12 @@ def delete_model():
 
     return jsonify(result)
 
-app.route('/api/install', methods=['GET'])
+@app.route('/api/install', methods=['GET'])
 def install():
     
     response = install_ollama()
     print(response)
-    
+
 ######  FUNCTIONS   ######
 def run_delete_model(model):
     # Define the curl command
