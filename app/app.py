@@ -76,7 +76,7 @@ def delete_model():
 
     return jsonify(result)
 
-app.route('/api/install', methods=['POST'])
+app.route('/api/install', methods=['GET'])
 def install():
     
     install_ollama()
