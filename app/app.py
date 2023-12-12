@@ -219,7 +219,7 @@ class EngineManager(object):
 
 # Load and parse the config file:
 try:
-    config_file = open(working_directory), 'r')
+    config_file = open(working_directory(), 'r')
 except:
     sys.exit('config.json not found.')
 
