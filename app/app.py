@@ -56,6 +56,18 @@ def process_question():
     # Return the result as JSON
     return jsonify({"message":result})
 
+@app.route('/api/vlm', methods=['POST'])
+def vlm_model():
+    data = request.get_json()
+    model = data.get('model', '')
+    prompt = data.get('prompt', '')
+    image = data.get('image', '')
+
+    result = run_vlm_question(model, prompt, image)
+
+    # Return the result as a JSON
+    return jsonify({"message":result})
+
 @app.route('/api/pull', methods=['POST'])
 def pull_model():
     data = request.get_json()
@@ -120,6 +132,21 @@ def run_pull_model(model):
 
     response = json.loads(output)
     return response
+
+def run_vlm_question(model, prompt, image):
+    # Define the curl command
+    curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{prompt}", "image": "{image}"}}\''
+
+    # Run the command and capture the output
+    output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
+
+    # Process the output as JSON and extract "response" values
+    responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
+
+    # Create a JSON containing only "response" values
+    response_json = {'responses': responses}
+
+    return response_json
 
 def run_model_question(question, model):
     # Define the curl command
