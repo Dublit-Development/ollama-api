@@ -35,7 +35,7 @@ to download all of the necessary packages for the models
 Massive thank you to @cantrell on GitHub for their open source contributions related
 to Stable Diffusion 
 '''
-
+OLLAMA_INSTALL = False
 
 @app.route('/')
 def index():
@@ -79,9 +79,12 @@ def delete_model():
 
 @app.route('/api/install', methods=['GET'])
 def install():
-    
-    response = install_ollama()
-    return jsonify({'message':response})
+    if OLLAMA_INSTALL == False:
+        response = install_ollama()
+        return jsonify({'message':response})
+    else:
+        response = "Ollama is installed"
+        return jsonify({'messsage':response})
 
 @app.route('/api/list-models', methods=['GET'])
 def listModels():
@@ -90,8 +93,11 @@ def listModels():
 
 ######  HELPER FUNCTIONS   ######
 def listInstalledModels():
-    res = subprocess.run(["ollama", "list"], capture_output=True, text=True)
-    res = res.stdout
+    curl_command = f'curl http://localhost:11434/api/tags'
+
+    output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
+    res = json.loads(output)
+
     return res
 
 def run_delete_model(model):
