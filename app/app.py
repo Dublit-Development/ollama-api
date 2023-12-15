@@ -96,7 +96,7 @@ def listInstalledModels():
 
 def run_delete_model(model):
     # Define the curl command
-    curl_command = f'curl -X DELETE http://localhost:11434/api/delete -d \'{"name": "{model}"}\''
+    curl_command = f'curl -X DELETE http://localhost:11434/api/delete -d \'{{"name": "{model}"}}\''
 
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
