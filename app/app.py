@@ -26,7 +26,7 @@ d88' `888  `888  `888   d88' `88b  888  `888    888
 
 below is a mix of Flask API functionality and Stable Diffusion model installations
 
-The SD installations will check for what isinstalled on your machine, and install the
+The Stable Diffusion installations will check for what isinstalled on your machine, and install the
 requirements that are missing. After the first boot, the installer will only connect and load
 the engines into memory and not install anything new. Roughly 6GB of disk space needed
 to download all of the necessary packages for the models
@@ -54,7 +54,7 @@ def process_question():
     print(result)
 
     # Return the result as JSON
-    return jsonify(result)
+    return jsonify({"message":result})
 
 @app.route('/api/pull', methods=['POST'])
 def pull_model():
@@ -64,9 +64,10 @@ def pull_model():
     result = run_pull_model(model)
     print(result)
 
-    return jsonify(result)
+    return jsonify({"message":result})
 
-@app.route('/api/delete', methods=['DELETE'])
+# change to post if it doesnt work. some intermediaries block json body when attatched to a DELETE
+@app.route('/api/delete', methods=['DELETE']) 
 def delete_model():
     data = request.get_json()
     model = data.get('model', '')
@@ -74,15 +75,25 @@ def delete_model():
     result = run_delete_model(model)
     print(result)
 
-    return jsonify(result)
+    return jsonify({"message":result})
 
 @app.route('/api/install', methods=['GET'])
 def install():
     
     response = install_ollama()
-    print(response)
+    return jsonify({'message':response})
 
-######  FUNCTIONS   ######
+@app.route('/api/list-models', methods=['GET'])
+def listModels():
+    res = listInstalledModels()
+    return jsonify({'models':res})
+
+######  HELPER FUNCTIONS   ######
+def listInstalledModels():
+    res = subprocess.run(["ollama", "list"], capture_output=True, text=True)
+    res = res.stdout
+    return res
+
 def run_delete_model(model):
     # Define the curl command
     curl_command = f'curl -X DELETE http://localhost:11434/api/delete -d \'{"name": "{model}"}\''
