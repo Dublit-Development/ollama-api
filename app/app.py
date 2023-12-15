@@ -146,7 +146,7 @@ def run_vlm_question(model, prompt, image):
     print(output_json)
 
     # Extract the "response" value
-    responses = output_json[0].get("response", None)
+    responses = output_json.get("response", None)
 
     # Create a JSON containing only "response" values
     response_json = {'responses': responses}
