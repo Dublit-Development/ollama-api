@@ -139,9 +139,10 @@ def run_vlm_question(model, prompt, image):
 
     # Run the command and capture the output
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
-
+    print(output)
     # Parse the JSON string in the output variable
     output_json = json.loads(output)
+    print(output_json)
 
     # Extract the "response" value
     responses = output_json[0].get("response", None)
