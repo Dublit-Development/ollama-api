@@ -79,12 +79,14 @@ def delete_model():
 
 @app.route('/api/install', methods=['GET'])
 def install():
-    if OLLAMA_INSTALL == False:
+    global OLLAMA_INSTALL
+
+    if not OLLAMA_INSTALL:
         response = install_ollama()
-        return jsonify({'message':response})
+        OLLAMA_INSTALL = True
+        return jsonify({'message': response})
     else:
-        response = "Ollama is installed"
-        return jsonify({'messsage':response})
+        return jsonify({'message': 'OLLAMA_INSTALL is already set to True'})
 
 @app.route('/api/list-models', methods=['GET'])
 def listModels():
