@@ -135,13 +135,13 @@ def run_pull_model(model):
 
 def run_vlm_question(model, prompt, image):
     # Define the curl command
-    curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{prompt}", "images": "{image}"}}\''
+    curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{prompt}", "stream": false, "images": "{image}"}}\''
 
     # Run the command and capture the output
     output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
 
     # Process the output as JSON and extract "response" values
-    responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
+    responses = json.loads(output)["response"]
 
     # Create a JSON containing only "response" values
     response_json = {'responses': responses}
