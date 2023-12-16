@@ -18,6 +18,13 @@ We only support python based responses using a simple Flask Route API running on
 Docker install:
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
+
+## How to run
+1. In order to run Ollama including Stable Diffusion models you must create a read-only HuggingFace API key.  [Creation of API Key](https://huggingface.co/docs/hub/security-tokens)
+
+2. Upon completion of generating an API Key you need to edit the config.json located in the `./app/config.json` file.
+![config](./assets/config_demo.gif)
+
 #### Prerequisites
 You may need to run the following commands on your Linux Server before getting started with the scripts.
 
