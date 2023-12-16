@@ -1,4 +1,4 @@
-Flask
+flask
 requests
 pillow
 torch

@@ -15,6 +15,9 @@ We only support python based responses using a simple Flask Route API running on
 
 ## How to Install
 
+Docker install:
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
 #### Prerequisites
 You may need to run the following commands on your Linux Server before getting started with the scripts.
 
