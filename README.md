@@ -47,24 +47,28 @@ pip install accelerate
 This project would not be possible without continous contributions from the Open Source Community.
 ### Ollama
 Massive thanks to Ollama and the contiributors sustaining the project.  This service would not be possible without continued development.
+
 [Ollama Github](https://github.com/jmorganca/ollama)
 
 [Ollama Website](https://ollama.ai/)
 
 ### @cantrell
 Cantrell is a developer who insipired this modular service to use LLMs and Stable Diffusion inclusively.  Massive thanks to his contribution!
+
 [Cantrell Github](https://github.com/cantrell)
 
 [Stable Diffusion API Server](https://github.com/cantrell/stable-diffusion-api-server)
 
 ### Valdi
-Our preferred HPC partner 🖥️
+Our preferred HPC partner  🖥️
+
 [Valdi](https://valdi.ai/)
 
 [Support us](https://valdi.ai/signup?ref=YZl7RDQZ)
 
 ### Replit
-Our preferred IDE and deployment platform 🚀
+Our preferred IDE and deployment platform  🚀
+
 [Replit](https://replit.com/)
 
 --
