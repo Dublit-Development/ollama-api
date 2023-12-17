@@ -1,7 +1,7 @@
 # Ollama API: A backend server to interact with Ollama and Stable Diffusion
 Ollama is a fantastic software that allows you to get up and running open-source LLM models quickly alongside with Stable Diffusion this repository is the quickest way to chat with multiple LLMs, generate images and perform VLM analysis.  The complied code will deploy a Flask Server on your choice of hardware.
 
-![demo](./assets/demo.mp4)
+![demo](/assets/demo.png)
 
 ## Roadmap
 - **Apache Support**:  We plan to support a production service API using WSGI 
@@ -18,7 +18,7 @@ Ollama is a fantastic software that allows you to get up and running open-source
 #### Interact with the server (UI)
 We made this task as simple as possile using the powers of Replit and Valdi.  Valdi is our HPC provider which runs the backend and infrastucture to chat, generate images and perform VLM analysis.  Replit serves as a easy way to deploy our Modular UI to perform actions speciffic to the server.  You can easily fork our public UI on Replit to configure any changes but also interact with the backend service.  Only two steps are required:
 1. Fork the UI on Replit
-2. When prompted enter your IP Address into the secrets manager
+2. When prompted enter your Server Address into the secrets manager
 
 [Modular LLM UI](https://replit.com/@bkr-studio/VALDI-LLMs-1?v=1)
 
