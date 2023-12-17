@@ -1,7 +1,7 @@
 # Ollama API: A backend server to interact with Ollama and Stable Diffusion
 Ollama is a fantastic software that allows you to get up and running open-source LLM models quickly alongside with Stable Diffusion this repository is the quickest way to chat with multiple LLMs, generate images and perform VLM analysis.  The complied code will deploy a Flask Server on your choice of hardware.
 
-![demo](./assets/demo.gif)
+![demo](./assets/demo.mp4)
 
 ## Roadmap
 - **Apache Support**:  We plan to support a production service API using WSGI 
