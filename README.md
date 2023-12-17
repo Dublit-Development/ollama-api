@@ -9,39 +9,30 @@ We only support python based responses using a simple Flask Route API running on
 - **Restful Support** Creating a quick RESTful deployment to query your favorite models with ease
 - **Docker** Ensure deployment is seamless and simple using docker
 
-## How to Install
-
-Docker install:
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
-
-
-## Hardware Specs
+## How to Run
+#### Hardware Specs
 Ensure that you have a machine with the following Hardware Specifications:
-1. Ubuntu Linux
+1. Ubuntu Linux or Macintosh (Windows is not supported)
 2. 32 GB of RAM
 3. 6 CPUs/vCPUs
 4. 50 GB of Storage
 5. NVIDIA GPU
 
 #### Prerequisites
-1. Git clone the 
 1. In order to run Ollama including Stable Diffusion models you must create a read-only HuggingFace API key.  [Creation of API Key](https://huggingface.co/docs/hub/security-tokens)
-
-2. Upon completion of generating an API Key you need to edit the config.json located in the `./app/config.json` file.
+2. Upon completion of generating an API Key you need to edit the config.json located in the `./app/config.json`
 ![config](./assets/config_demo.gif)
-
-
-You may need to run the following commands on your Linux Server before getting started with the scripts.
+3. Install neccessary dependencies and requirements: 
 
 ```sh
-sudo apt-get update 
+# Update your machine (Linux Only)
+sudo apt-get update
+# Install pip
 sudo apt-get install python3-pip 
-pip install Flask requests
-pip install pillow
-pip install torch
-pip install diffusers
-pip install transformers
-pip install accelerate
+# Navigate to the directory containing requirements.txt
+./app
+# Run the pip install command
+pip install -r requirements.txt
 ```
 ## Credits ✨
 This project would not be possible without continous contributions from the Open Source Community.
