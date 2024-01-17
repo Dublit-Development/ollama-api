@@ -9,10 +9,12 @@ from io import BytesIO
 import torch
 import diffusers
 import os
+import requests
 
 
 app = Flask(__name__)
 
+VALDI_ENDPOINT = 'http://localhost:5000'
 
 '''
 made with <3 by
@@ -37,6 +39,7 @@ to Stable Diffusion
 '''
 OLLAMA_INSTALL = False
 
+# ------------> BACKEND FUNCTIONS <-------
 @app.route('/')
 def index():
     # Render the index.html template
@@ -174,10 +177,10 @@ def working_directory():
     current_directory = os.getcwd()
 
     # Define the file name you are looking for
-    file_to_find = "config.json"
+    file_path = "./app/config.json"
 
     # Contruct the full path to the file
-    file_path = os.path.join(current_directory, file_to_find)
+    #file_path = os.path.join(current_directory, file_to_find)
 
     return file_path
 
@@ -406,6 +409,218 @@ def _generate(task, engine=None):
         output_data[ 'message' ] = 'A RuntimeError occurred. You probably ran out of GPU memory. Check the server logs for more details.'
         print(str(e))
     return jsonify( output_data )
+
+
+# ------------> FORONTEND INTERACTIONS <------------
+# HANDLE A BASIC CHAT REQUEST
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    # Error handling for not receiving JSON
+    if not request.is_json:
+        return jsonify({"error": "Missing JSON in request"}), 400
+
+    data = request.get_json()
+
+    # Error handling for missing model or message in the JSON
+    if 'model' not in data or 'message' not in data:
+        return jsonify({"error": "Missing 'model' or 'message' in JSON request"}), 400
+
+    model = data['model']
+    message = data['message']
+
+    response = process_model_request(model=model, message=message)
+
+    if 'error' in response:
+        # Error responses will be a tuple with (response, status_code)
+        return jsonify(response[0]), response[1]
+
+    return response, 200
+
+# HANDLE A BASIC CHAT REQUEST
+@app.route('/api/llava', methods=['POST'])
+def llavaChat():
+    # Error handling for not receiving JSON
+    if not request.is_json:
+        return jsonify({"error": "Missing JSON in request"}), 400
+
+    data = request.get_json()
+
+    # Error handling for missing model or message in the JSON
+    if 'model' not in data or 'message' not in data:
+        return jsonify({"error": "Missing 'model' or 'message' in JSON request"}), 400
+
+    model = data['model']
+    message = data['message']
+    image = data['image']
+
+    try:
+      response = requests.post(
+          url=f"{VALDI_ENDPOINT}/api/vlm",
+          headers={'Content-Type': 'application/json'},
+          data=json.dumps({'prompt':message, 'model':model, 'image': [image]})
+      )
+      response.raise_for_status()
+      return response.json()
+    except requests.RequestException as e:
+      return {"error": str(e)}, 500
+
+    return response, 200
+
+# PROCESS THAT ACTS AS A PROXY TO CHAT REQUESTS
+def process_model_request(model, message):
+  def post_to_valdi(model, message):
+      try:
+          response = requests.post(
+              url=f"{VALDI_ENDPOINT}/api/question",
+              headers={'Content-Type': 'application/json'},
+              data=json.dumps({'question':message, 'model':model})
+          )
+          response.raise_for_status()
+          return response.json()
+      except requests.RequestException as e:
+          return {"error": str(e)}, 500
+  match model:
+      case 'llama2':
+          return post_to_valdi('llama2', message)
+      case 'mistral':
+          return post_to_valdi('mistral', message)
+      case 'vlm':
+          return post_to_valdi('vlm', message)
+      case _:
+        try:
+          response = requests.post(
+            url=f"{VALDI_ENDPOINT}/api/question",
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({'question':message, 'model':model})
+          )
+          response.raise_for_status()
+          return response.json()
+        except Exception as e:
+          return {"error": f"Model '{model}' is unsupported, {e}"}, 404
+
+# HANDLE A REQUEST TO THE STABLE DIFFUSION ENDPOINT
+@app.route('/txt2img', methods=['POST'])
+def txt2img_route():
+    try:
+      request_data = request.get_json()
+
+      prompt = request_data.get('prompt', '')
+      seed = random.randint(1,1000000)
+      outputs = request_data.get('num_outputs', 1)
+      width = request_data.get('width', 512)
+      height = request_data.get('height', 512)
+      steps = request_data.get('num_inference_steps', 10)
+      guidance_scale = request_data.get('guidance_scale', 0.5)
+
+      url = VALDI_ENDPOINT + '/txt2img'
+
+      request_body = {
+          "prompt": prompt,
+          "seed": seed,
+          "num_outputs": outputs,
+          "width": width,
+          "height": height,
+          "num_inference_steps": steps,
+          "guidance_scale": guidance_scale
+      }
+
+      print(request_body)
+
+      headers = {
+          'Content-Type': 'application/json',
+          # Add any other headers if needed
+      }
+
+
+      response = requests.post(url, headers=headers, data=json.dumps(request_body))
+      response_data = response.json()
+
+      if response_data['status'] == 'success':
+          image_data = response_data['images'][0]
+          image_bytes = BytesIO(base64.b64decode(image_data['base64']))
+          img = Image.open(image_bytes)
+          img_bytes = BytesIO()
+          img.save(img_bytes, format='PNG')
+          img_data = img_bytes.getvalue()
+
+          return jsonify({
+              'status': 'success',
+              'message': 'Image data retrieved successfully',
+              'image_data': base64.b64encode(img_data).decode('utf-8')
+          })
+      else:
+          return jsonify({'error': f"Request failed: {response_data['message']}"}), 500
+    except Exception as error:
+        return jsonify({'error': f"Error: {error}"}), 500
+
+# LIST ALL OF THE OLLAMA MODELS ON THE MACHINE
+@app.route('/list-models', methods=['GET'])
+def list_models_route():
+  try:
+    url = VALDI_ENDPOINT + '/api/list-models'
+    response = requests.get(url)
+    response_data = response.json()
+
+    return jsonify({
+        'status': 'success',
+        'message': 'Models retrieved successfully',
+        'models': response_data['models']
+    })
+  except Exception as error:
+    return jsonify({'error': f"Error: {error}"}), 500
+
+
+# Flask route to install a model
+@app.route('/install-model', methods=['POST'])
+def install_model():
+    try:
+        data = request.get_json()
+        model_name = data.get('model_name')
+        if not model_name:
+            return jsonify({'error': 'Model name is required'}), 400
+        install_url = f"{VALDI_ENDPOINT}/api/pull"
+        response = requests.post(install_url, json={'model': model_name})
+        result = response.json().get('message')
+        return result
+    except Exception as error:
+        return jsonify({'error': str(error)}), 500
+
+# Flask route to uninstall a model
+@app.route('/uninstall-model', methods=['POST'])
+def uninstall_model():
+    try:
+        data = request.get_json()
+        model_name = data.get('model_name')
+        if not model_name:
+            return jsonify({'error': 'Model name is required'}), 400
+        uninstall_url = f"{VALDI_ENDPOINT}/api/delete"
+        response = requests.delete(uninstall_url, json={'model': model_name})
+        result = response.json().get('message')
+        if(result == None):
+          result = "Model successfully uninstalled"
+        return jsonify({"message":result})
+    except Exception as error:
+        return jsonify({'error': str(error)}), 500
+
+# install ollama
+@app.route('/install', methods=['GET'])
+def install_get():
+    try:  
+        install_url = f"{VALDI_ENDPOINT}/api/install"
+        response = requests.get(install_url)
+        result = response.json().get('message')
+        return result
+    except Exception as error:
+        return jsonify({'error': str(error)}), 500
+
+
+# DENY GET REQUESTS TO THE CHAT ENDPOINT
+@app.route('/api/chat', methods=['GET'])
+def get_chat():
+    return jsonify({"message": "GET method is not supported for /api/chat"}), 405
+
+
+
 
 def run_api():
     app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)

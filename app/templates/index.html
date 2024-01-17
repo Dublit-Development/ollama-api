@@ -11,9 +11,58 @@
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="prompt blink">$ Your Ollama API is running</div>
+    <h1>VALDI Modular LLM</h1>
+
+  <div id="controls">
+    <select id="model-select" name="modelSelect" title="modelSelect">
+      <option value="" disabled selected>Select a Model</option>
+    </select>
+
+    <div id="model-lists">
+      <div class="list-wrapper">
+        <h4>Installed</h4>
+        <div id="installed" class="model-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <!-- Dynamically filled with installed models -->
+        </div>
+      </div>
+      <div class="list-wrapper">
+        <h4>Uninstalled</h4>
+        <div id="uninstalled" class="model-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <!-- Dynamically filled with uninstalled models -->
+        </div>
+      </div>
     </div>
-    <script src="../static/js/main.js"></script>
+
+    <div id="loader" class="loaderAnimation">
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path id="svgPath" d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/>
+      </svg>
+    </div>
+
+    </div>
+
+    <a id="menu_toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc. --><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+    </a>
+
+  </div>
+
+
+
+
+  <div id="container">
+    <div id="chat-area">
+    
+    </div>
+    <div id="chat-inputs">
+      <input type="text" id="user-input" placeholder="Type your message here...">
+      <button id="send-button">Send</button>
+    </div>
+    <div id="llava-file-upload">
+      <input type="file" id="llava-upload-input" hidden>
+      <label for="llava-upload-input" class="llava-upload-label">Drop file here or click to upload</label>
+    </div>
+    </div>
+  </div>
+   <script src="../static/js/main.js"></script>
 </body>
 </html>

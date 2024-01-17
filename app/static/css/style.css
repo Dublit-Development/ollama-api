@@ -1,49 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Foldit:wght@600&family=IBM+Plex+Mono&family=Inter&family=Monoton&family=Nunito&family=Open+Sans&family=Plaster&family=Raleway:wght@300;500&family=Roboto&family=Roboto+Mono&display=swap');
+
 body {
-    margin: 0;
-    background-color: #222222;
-    font-family: 'Courier New', monospace;
-    color: #fffdfa;
-    overflow: hidden;
-    height: 100vh;
+  font-family:system-ui, -apple-system,'Raleway', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxy;
+  margin:0 auto;
+  padding:0;
+  background-color:#1a1c47;
+  color:#fffdfa;
 }
 
-.terminal {
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
+/* default scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-.prompt {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    line-height: 1.5;
-    animation: blinkCursor 1s infinite;
+::-webkit-scrollbar-track {
+    background: #00000000; 
+    border-radius: 8px;
 }
 
-.blink {
-    animation: blinkCursor 1s infinite;
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 8px;
 }
 
-@keyframes blinkCursor {
-    0%, 100% {
-        border-right: 2px solid #fff;
-    }
-    50% {
-        border-right: 2px solid transparent;
-    }
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/* scrollbar for divs */
+div::-webkit-scrollbar {
+    width: 10px;
 }
 
-/* Position the "Made with love by Dublit" message */
-.love-message {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    font-size: 12px;
-    text-align: right;
+div::-webkit-scrollbar-track {
+    background: #00000000; 
+    border-radius: 8px;
 }
 
-/* Style the heart icon */
-.heart {
-    color: red;
+div::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 8px;
+}
+
+div::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+h1, h3 {
+  text-align:center;
+  font-family: 'Raleway';
+}
+
+#chat-area {
+  height:80%;
+  max-height:80%;
+  width:99%;
+  overflow-y:scroll;
+  padding:8px;
+  border-radius:8px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+#container {
+  margin:0 auto;
+  width:90%;
+  height:70vh;
+  background:linear-gradient(145deg, #4f4cdc50, #1d1b8850);
+  padding:12px;
+  border-radius:8px 24px 8px 8px;
+}
+
+#chat-inputs {
+  width:100%;
+  border-top:#cccccc90 1px solid;
+  display:flex;
+  flex-direction:row;
+  gap:0px;
+  height:10%;
+}
+#chat-inputs input {
+  margin-top:12px;
+  width:80%;
+  padding:0px;
+  border-radius:6px 0px 0px 6px;
+  outline:none;
+  border:1px solid #00000000;
+  color:#fffdfa;
+  background-color:#fffdfa20;
+  transition: all ease-out 0.2s;
+  font-size:1rem;
+}
+#chat-inputs input:hover {
+  box-shadow:0px 0px 24px #22222280;
+}
+#chat-inputs input:focus {
+  box-shadow:0px 0px 24px #22222280;
+}
+#chat-inputs button {
+  margin-top:12px;
+  width:20%;
+  padding:0px;
+  border-radius:0px 6px 6px 0px;
+  outline:none;
+  border:1px solid #00000000;
+  cursor:pointer;
+  background-color:#fffdfa50;
+  font-size:1rem;
+}
+#chat-inputs button:hover {
+  box-shadow:0px 0px 24px #22222280;
+}
+#chat-inputs button:focus {
+  box-shadow:0px 0px 24px #22222280;
+}
+
+#model-select {
+  width:200px;
+  height:48px;
+  border-radius:8px;
+  position:relative;
+  cursor:pointer;
+  background-color:#00000000;
+  border:1px solid #fffdfa;
+  color:#fffdfa;
+}
+#model-select option {
+  background-color:#1a1c47;
+  color:#fffdfa;
+}
+
+.userMessage {
+  position:relative;
+  background-color: #007AFF;
+  color: #fff;
+  position:relative;
+  border-radius: 18px 18px 4px 18px;
+  max-width: 60%;
+  padding: 10px 15px;
+  margin: 10px;
+  align-self: flex-end;
+  word-wrap: break-word;
+  left:10px;
+}
+
+.botMessage {
+  position:relative;
+  background-color: #00000000;
+  border-radius: 18px 18px 18px 4px;
+  max-width: 60%;
+  padding: 10px 15px;
+  margin: 10px;
+  align-self: flex-start;
+  word-wrap: break-word;
+  right:10px;
+  border:1px solid #cccccc;
+}
+
+.botMessage img {
+  border-radius:6px;
+  max-width:96%;
+}
+
+#controls {
+  display:flex;
+  flex-direction:row;
+  width:90%;
+  justify-content:space-between;
+  border-radius:16px;
+  background-color:#fffdfa30;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  margin: 0 auto;
+  padding:8px;
+  max-height:250px;
+  height:128px;
+  transition: all ease-out 0.2s;
+  overflow-y:auto;
+  overflow-x:hidden;
+  margin-bottom:8px;
+}
+#model-lists {
+  display:flex;
+  flex-direction:row;
+  gap:12px;
+  transition:all ease-out 0.2s;
+  text-align:center;
+}
+.model-list {
+  background-color: #fffdfa20;
+  padding:4px;
+  border-radius:3px 6px 12px 6px;
+  font-size:12px;
+  transition:all ease-out 0.2s;
+  min-height:48px;
+  min-width:82px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.list-wrapper h4 {
+  padding:0px;
+  margin:0px;
+  transition:all ease-out 0.2s;
+}
+
+#menu_toggle {
+  position:absolute;
+  margin:0 auto;
+  width:48px;
+  left:48%;
+  transform:rotate(180deg);
+  fill:#fffdfa;
+  margin-top:-32px;
+  cursor:pointer;
+  transition: all ease-in-out 0.2s;
+}
+#menu_toggle svg {
+  width:100%;
+  transition: all ease-in-out 0.2s;
+}
+#menu_toggle:hover {
+  transform:translate(0px,-2px) rotate(180deg);
+}
+.model-installer {
+  border:1px solid #fffdfa;
+  border-radius:64px;
+  text-align:center;
+  padding:2px;
+  cursor:pointer;
+}
+.model-installer:active {
+  cursor:grab;
+}
+
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.95);
+  }
+  50% {
+    transform: (1.05);
+  }
+  100% {
+    transform: rotate(360deg) scale(0.95);
+  }
+}
+.loaderAnimation {
+  animation: rotate 2s infinite;
+}
+#svgPath {
+  animation: pulse 2s infinite;
+}
+
+#loader svg{
+  height:100%;
+  fill:#fffdfa;
+}
+#loader {
+  display:none;
+  height:64px;
+  width:64px;
+}
+
+#llava-file-upload {
+  display:none;
 }
