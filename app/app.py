@@ -177,10 +177,10 @@ def working_directory():
     current_directory = os.getcwd()
 
     # Define the file name you are looking for
-    file_path = "./app/config.json"
+    file_to_find = "config.json"
 
     # Contruct the full path to the file
-    #file_path = os.path.join(current_directory, file_to_find)
+    file_path = os.path.join(current_directory, file_to_find)
 
     return file_path
 
