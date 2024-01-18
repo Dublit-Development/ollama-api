@@ -47,6 +47,54 @@ sudo apt-get install python3-pip
 # Run the pip install command
 pip install -r requirements.txt
 ```
+
+## VALDI Modular LLM Fontend
+This project contains a user interface for interacting with various language models through chat in the browser. It integrates with the Modular LLM backend server to allow users to select different models, send messages, and view responses.
+
+The Modular LLM backend server can be found at the following [Github](https://github.com/Dublit-Development/ollama-api)
+
+It would be great if you can support the project and give it a ⭐️.
+
+### Features
+
+- **Dynamic Model Selection**: Users can select from a range of installed language models to interact with.
+- **Installation Management**: Users can install or uninstall models by dragging them between lists.
+- **Chat Interface**: Interactive chat area for users to communicate with the chosen language model.
+- **Support for Text-to-Image Generation**: It includes a feature to send requests to a Stable Diffusion endpoint for text-to-image creation.
+- **Image Uploads for LLaVA**: Allows image uploads when interacting with the LLaVA model.
+
+### Frontend
+
+- **HTML**: `templates/index.html` provides the structure of the chat interface and model management area.
+- **JavaScript**: `static/js/script.js` contains all the interactive logic, including event listeners, fetch requests, and functions for managing models.
+- **CSS**: `static/css/style.css` presents the styling for the web interface.
+
+### Proxy-Backend
+
+- **Python with Flask**: `main.py` acts as the server, handling the various API endpoints, requests to the VALDI endpoint, and serving the frontend files. While python, this is more of a frontend file than backend; similar to cloud functions on firebase. It functions as a serverless backend endpoint, but is a proxy to your real backend
+
+### API Endpoints
+This directly interacts with the Backend Server hosted on VALDI.
+
+- `/`: Serves the main chat interface.
+- `/api/chat`: Handles chat messages sent to different language models.
+- `/api/llava`: Specialized chat handler for the LLaVA model that includes image data.
+- `/txt2img`: Endpoint for handling text-to-image generation requests.
+- `/list-models`: Returns the list of available models installed on the server.
+- `/install-model`: Installs a given model.
+- `/uninstall-model`: Uninstalls a given model.
+- `/install`: Endpoint used for initial setup, installing necessary components.
+
+### Installation Instructions
+
+To get the VALDI Modular LLM Chat Interface running:
+
+1. Fork or clone this repository to your local machine or Replit environment.
+2. Install the required Python modules with `pip install -r requirements.txt` or run the program to install dependencies on Replit.
+4. Set the `VALDI_ENDPOINT` stored in secrets on Replit environment variable to your backend's endpoint.
+5. Run `main.py` to start the Flask server.
+6. Access the web interface by opening `localhost:81` in your web browser (or the port you configured), or in the webview of Replit.
+
 ## Credits ✨
 This project would not be possible without continous contributions from the Open Source Community.
 ### Ollama
