@@ -500,7 +500,7 @@ def process_model_request(model, message):
 
 
 # HANDLE A REQUEST TO THE STABLE DIFFUSION ENDPOINT
-@app.route('/txt2img', methods=['POST'])
+@app.route('/txt2img-trigger', methods=['POST'])
 def txt2img_route():
     try:
       request_data = request.get_json()
