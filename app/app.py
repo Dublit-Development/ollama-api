@@ -471,32 +471,33 @@ def process_model_request(model, message):
     def post_to_valdi(model, message):
         try:
             response = requests.post(
-            url=f"{VALDI_ENDPOINT}/api/question",
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({'question':message, 'model':model})
+                url=f"{VALDI_ENDPOINT}/api/question",
+                headers={'Content-Type': 'application/json'},
+                data=json.dumps({'question': message, 'model': model})
             )
             response.raise_for_status()
             return response.json()
         except requests.RequestException as e:
             return {"error": str(e)}, 500
-    match model:
-        case 'llama2':
-            return post_to_valdi('llama2', message)
-        case 'mistral':
-            return post_to_valdi('mistral', message)
-        case 'vlm':
-            return post_to_valdi('vlm', message)
-        case _:
-            try:
-                response = requests.post(
+
+    if model == 'llama2':
+        return post_to_valdi('llama2', message)
+    elif model == 'mistral':
+        return post_to_valdi('mistral', message)
+    elif model == 'vlm':
+        return post_to_valdi('vlm', message)
+    else:
+        try:
+            response = requests.post(
                 url=f"{VALDI_ENDPOINT}/api/question",
                 headers={'Content-Type': 'application/json'},
-                data=json.dumps({'question':message, 'model':model})
-                )
-                response.raise_for_status()
-                return response.json()
-            except Exception as e:
-                return {"error": f"Model '{model}' is unsupported, {e}"}, 404
+                data=json.dumps({'question': message, 'model': model})
+            )
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            return {"error": f"Model '{model}' is unsupported, {e}"}, 404
+
 
 # HANDLE A REQUEST TO THE STABLE DIFFUSION ENDPOINT
 @app.route('/txt2img', methods=['POST'])

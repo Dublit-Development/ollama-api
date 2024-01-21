@@ -121,3 +121,17 @@ Our preferred IDE and deployment platform  🚀
 
 --
 Created by [Dublit](https://dublit.org/) - Delivering Ollama to the masses
+
+# Cuda update drivers 
+sudo apt-get install -y cuda-drivers
+
+
+# directory permission error 
+chmod 600 Ojama.pem
+
+# update python version
+https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
+
+# Enable 5000 firewall
+sudo ufw allow 5000
+sudo ufw status
