@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   // Function to make the POST request
   async function txt2imgRequest(prompt,seed,outputs,width,height,steps,guidance_scale) {
-      const url = '/txt2img'; // CHANGE TO YOUR ENDPOINT IN SECRETS
+      const url = '/txt2img-trigger'; // CHANGE TO YOUR ENDPOINT IN SECRETS
 
       const requestBody = {
         "prompt": prompt,
