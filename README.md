@@ -1,5 +1,7 @@
-# Ollama API: A backend server to interact with Ollama and Stable Diffusion
-Ollama is a fantastic software that allows you to get up and running open-source LLM models quickly alongside with Stable Diffusion this repository is the quickest way to chat with multiple LLMs, generate images and perform VLM analysis.  The complied code will deploy a Flask Server on your choice of hardware.
+# Ollama API: A UI and Backend Server to interact with Ollama and Stable Diffusion
+Ollama is a fantastic software that allows you to get up and running open-source LLM models quickly alongside with Stable Diffusion this repository is the quickest way to chat with multiple LLMs, generate images and perform VLM analysis.  The complied code will deploy a Flask Server on your choice of hardware.  
+
+It would be great if you can support the project and give it a ⭐️.
 
 ![demo](/assets/demo.png)
 
@@ -15,12 +17,6 @@ Ollama is a fantastic software that allows you to get up and running open-source
 
 ![run](./assets/run_server.gif)
 
-#### Interact with the server (UI)
-We made this task as simple as possile using the powers of Replit and Valdi.  Valdi is our HPC provider which runs the backend and infrastucture to chat, generate images and perform VLM analysis.  Replit serves as a easy way to deploy our Modular UI to perform actions speciffic to the server.  You can easily fork our public UI on Replit to configure any changes but also interact with the backend service.  Only two steps are required:
-1. Fork the UI on Replit
-2. When prompted enter your Server Address into the secrets manager
-
-[Modular LLM UI](https://replit.com/@bkr-studio/VALDI-LLMs-1?v=1)
 
 #### Hardware Specs
 Ensure that you have a machine with the following Hardware Specifications:
@@ -46,16 +42,16 @@ sudo apt-get install python3-pip
 ./app
 # Run the pip install command
 pip install -r requirements.txt
+
+# Enable port 5000 (ufw)
+sudo ufw allow 5000
+sudo ufw status
+
+# CUDA update drivers 
+sudo apt-get install -y cuda-drivers
 ```
 
-## VALDI Modular LLM Fontend
-This project contains a user interface for interacting with various language models through chat in the browser. It integrates with the Modular LLM backend server to allow users to select different models, send messages, and view responses.
-
-The Modular LLM backend server can be found at the following [Github](https://github.com/Dublit-Development/ollama-api)
-
-It would be great if you can support the project and give it a ⭐️.
-
-### Features
+### Front End Features
 
 - **Dynamic Model Selection**: Users can select from a range of installed language models to interact with.
 - **Installation Management**: Users can install or uninstall models by dragging them between lists.
@@ -85,16 +81,6 @@ This directly interacts with the Backend Server hosted on VALDI.
 - `/uninstall-model`: Uninstalls a given model.
 - `/install`: Endpoint used for initial setup, installing necessary components.
 
-### Installation Instructions
-
-To get the VALDI Modular LLM Chat Interface running:
-
-1. Fork or clone this repository to your local machine or Replit environment.
-2. Install the required Python modules with `pip install -r requirements.txt` or run the program to install dependencies on Replit.
-4. Set the `VALDI_ENDPOINT` stored in secrets on Replit environment variable to your backend's endpoint.
-5. Run `main.py` to start the Flask server.
-6. Access the web interface by opening `localhost:81` in your web browser (or the port you configured), or in the webview of Replit.
-
 ## Credits ✨
 This project would not be possible without continous contributions from the Open Source Community.
 ### Ollama
@@ -119,5 +105,15 @@ Our preferred IDE and deployment platform  🚀
 
 [Replit](https://replit.com/)
 
---
+----
 Created by [Dublit](https://dublit.org/) - Delivering Ollama to the masses
+
+## Troubleshooting
+Our prefered HPC provider is Valdi.  We access machine's securly by generating a privte and public key ssh file.  You will need to ensure the permissions are correct before accessing any machine.
+```sh
+chmod 600 Ojama.pem
+``` 
+### Python versions
+We support python versions 3.8 and above, however code can run more efficiently on most stable versions of python such as 3.10 or 3.11.  Here is a helpful guide as to how your python version can be updated.
+
+https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
