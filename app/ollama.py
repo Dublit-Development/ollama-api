@@ -11,7 +11,7 @@ def listInstalledModels():
 
 def listModels():
     res = listInstalledModels()
-    return {'models': res}  # Return the dictionary directly
+    return {'model': res}  # Return the dictionary directly
 
 # Now you can print the result or do whatever you want with it
 result = listModels()
