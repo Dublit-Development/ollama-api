@@ -37,8 +37,12 @@ def run_model_question(question, context):
     all_responses = {}
 
     for model in model_names:
+        # Use shlex.quote for question and context to handle special characters
+        quoted_question = shlex.quote(question)
+        quoted_context = shlex.quote(context)
+
         # Define the curl command for each model
-        curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{question}", "context": "{context}"}}\''
+        curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": {quoted_question}, "context": {quoted_context}}}\''
 
         # Run the command and capture the output
         output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
