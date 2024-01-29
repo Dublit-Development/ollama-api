@@ -138,7 +138,6 @@ def run_pull_model(model):
 
 def run_vlm_question(model, prompt, image):
     # Define the curl command
-    #curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{prompt}", "stream": false, "images": ["{image}"]}}\''
     curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{prompt}", "stream": false, "images": ["{image[0]}"]}}\''
 
     # Run the command and capture the output
