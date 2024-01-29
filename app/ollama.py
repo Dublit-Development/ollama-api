@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify, render_template
-import json
 import subprocess
+import json
 
 def listInstalledModels():
     curl_command = f'curl http://localhost:11434/api/tags'
@@ -12,7 +11,10 @@ def listInstalledModels():
 
 def listModels():
     res = listInstalledModels()
-    return jsonify({'models':res})
+    return {'models': res}  # Return the dictionary directly
 
-print(listModels())
+# Now you can print the result or do whatever you want with it
+result = listModels()
+print(result)
+
 
