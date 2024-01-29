@@ -41,10 +41,9 @@ def run_model_question(question):
         responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
 
         # Add the responses to the list for all models
-        all_responses.append({model: responses})
+        all_responses.extend({model: response} for response in responses)
 
     return all_responses
-
 # Run the question for all installed models
 results = run_model_question("Why is the sky blue?")
 print(results)
