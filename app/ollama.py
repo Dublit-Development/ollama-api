@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, shlex
 import json
 
 
@@ -25,7 +25,7 @@ Dutch = """The United East India Company (Dutch: Verenigde Oostindische Compagni
 
 Statistically, the VOC eclipsed all of its rivals in the Asia trade. Between 1602 and 1796 the VOC sent almost a million Europeans to work in the Asia trade on 4,785 ships and netted for their efforts more than 2.5 million tons of Asian trade goods and slaves. By contrast, the rest of Europe combined sent only 882,412 people from 1500 to 1795, and the fleet of the English (later British) East India Company, the VOC's nearest competitor, was a distant second to its total traffic with 2,690 ships and a mere one-fifth the tonnage of goods carried by the VOC. The VOC enjoyed huge profits from its spice monopoly and slave trading activities through most of the 17th century.[11]
 
-Having been set up in 1602 to profit from the Malukan spice trade, the VOC established a capital in the port city of Jayakarta in 1609 and changed its name to Batavia (now Jakarta). Over the next two centuries the company acquired additional ports as trading bases and safeguarded their interests by taking over surrounding territory.[12] It remained an important trading concern and paid an 18% annual dividend for almost 200 years. Much of the labour that built its colonies was from people it had enslaved.
+Having been set up in 1602 to profit from the Malukan spice trade, the VOC established a capital in the port city of Jayakarta in 1609 and changed its name to Batavia (now Jakarta). Over the next two centuries the company acquired additional ports as trading bases and safeguarded their interests by taking over surrounding territory.[12] It remained an important trading concern and paid an 18 annual dividend for almost 200 years. Much of the labour that built its colonies was from people it had enslaved.
 
 Weighed down by smuggling, corruption and growing administrative costs in the late 18th century, the company went bankrupt and was formally dissolved in 1799. Its possessions and debt were taken over by the government of the Dutch Batavian Republic."""
 
