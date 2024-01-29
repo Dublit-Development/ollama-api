@@ -21,7 +21,7 @@ def listModels():
 result = listModels()
 print(result)
 
-Dutch = """The United East India Company (Dutch: Verenigde Oostindische Compagnie, abbreviated as VOC, Dutch:]) and commonly known as the Dutch East India Company, was a chartered trading company and the first joint-stock company in the world.[2][3] Established on 20 March 1602[4] by the States General of the Netherlands existing companies, it was granted a 21-year monopoly to carry out trade activities in Asia.[5] Shares in the company could be bought by any resident of the United Provinces (Dutch Republic) and then subsequently bought and sold in open-air secondary markets (one of which became the Amsterdam Stock Exchange).[6] The company possessed quasi-governmental powers, including the ability to wage war, imprison and execute convicts,[7] negotiate treaties, strike its own coins, and establish colonies.[8] Also, because it traded across multiple colonies and countries from both the East and the West, the VOC is sometimes considered to have been the world's first multinational corporation."""
+Dutch = "The Dutch East India Company was a massive corporation."
 
 def run_model_question(question, context):
     # Get the list of installed models
