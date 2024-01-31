@@ -24,7 +24,7 @@ print(result)
 Dutch = "The Dutch East India Company was a massive corporation."
 
 def run_model_question(question, context):
-    # Get the list of installed models
+    # Get the list of installed models (replace listInstalledModels with the correct function)
     model_names = listInstalledModels()
 
     # Initialize a dictionary to store responses for each model
@@ -36,10 +36,11 @@ def run_model_question(question, context):
         quoted_context = shlex.quote(context)
 
         # Define the curl command for each model
-        curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{quoted_question}", "context": "{quoted_context}"}}\''
+        curl_command = f'curl http://localhost:11434/api/generate -d \'{{ "model": "{model}", "prompt": "{quoted_question}", "context": "{quoted_context}" }}\''
 
         # Run the command and capture the output
-        output = subprocess.check_output(curl_command, shell=True, encoding='utf-8')
+        result = subprocess.run(curl_command, shell=True, capture_output=True, text=True)
+        output = result.stdout
 
         # Process the output as JSON and extract "response" values
         responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
