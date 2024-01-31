@@ -39,13 +39,20 @@ def run_model_question(question, context):
         curl_command = f'curl http://localhost:11434/api/generate -d \'{{ "model": "{model}", "prompt": "{quoted_question}", "context": "{quoted_context}" }}\''
 
         # Run the command and capture the output
-        result = subprocess.run(curl_command, shell=True, capture_output=True, text=True)
-        output = result.stdout
+        process = subprocess.Popen(curl_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = process.communicate()
 
-        # Print the output for debugging
-        print("Raw Output:", output)
+        # Check for errors
+        if process.returncode != 0:
+            print(f"Error running command for model {model}. Error message: {error.decode('utf-8')}")
+            continue
+
         # Process the output as JSON and extract "response" values
-        responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
+        try:
+            responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON response for model {model}. Error message: {e}")
+            continue
 
         # Add the responses to the dictionary for all models
         all_responses[model] = responses
