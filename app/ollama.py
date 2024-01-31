@@ -38,7 +38,7 @@ def run_model_question(question, context):
         data_payload = {
             "model": model,
             "prompt": quoted_question,
-            "context": quoted_context
+            "context": []
         }
 
         # Convert the data payload to a JSON string
@@ -54,7 +54,7 @@ def run_model_question(question, context):
 
         # Print the output for debugging
         print("Raw Output:", output_str)
-        
+
         # Check for errors
         if process.returncode != 0:
             print(f"Error running command. Error message: {error.decode('utf-8')}")
@@ -73,5 +73,5 @@ def run_model_question(question, context):
     return all_responses
 
 # Run the question for all installed models
-results = run_model_question("What is the Dutch East India Company?", "The Dutch East India Company...")
+results = run_model_question("What is the Dutch East India Company?", )
 print(results)
