@@ -45,6 +45,9 @@ def run_model_question(question, context):
         # Process the output as JSON and extract "response" values
         responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
 
+        # Print the output for debugging
+        print("Raw Output:", output)
+        
         # Add the responses to the dictionary for all models
         all_responses[model] = responses
 
