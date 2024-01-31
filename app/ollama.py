@@ -73,5 +73,5 @@ def run_model_question(question, context):
     return all_responses
 
 # Run the question for all installed models
-results = run_model_question("What is the Dutch East India Company's? How much $ did the company make? What was the % owned?", "")
+results = run_model_question("""What is the Dutch East India Company's? How much $ did the company make? What was the % owned? Did the company ""? ""?  """, "")
 print(results)
