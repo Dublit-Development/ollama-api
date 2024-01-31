@@ -52,6 +52,9 @@ def run_model_question(question, context):
         # Decode the output from bytes to UTF-8 string
         output_str = output.decode('utf-8')
 
+        # Print the output for debugging
+        print("Raw Output:", output_str)
+        
         # Check for errors
         if process.returncode != 0:
             print(f"Error running command. Error message: {error.decode('utf-8')}")
