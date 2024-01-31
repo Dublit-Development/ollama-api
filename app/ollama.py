@@ -48,18 +48,21 @@ def run_model_question(question, context):
         process = subprocess.Popen(['curl', 'http://localhost:11434/api/generate', '-d', json_data],
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = process.communicate()
+        
+        # Decode the output from bytes to UTF-8 string
+        output_str = output.decode('utf-8')
 
         # Check for errors
         if process.returncode != 0:
-            print(f"Error running command for model {model}. Error message: {error.decode('utf-8')}")
-            continue
+            print(f"Error running command. Error message: {error.decode('utf-8')}")
+            return  # or exit the function, depending on your requirements
 
         # Process the output as JSON and extract "response" values
         try:
-            responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
+            responses = [json.loads(response)["response"] for response in output_str.strip().split('\n')]
         except json.JSONDecodeError as e:
-            print(f"Error decoding JSON response for model {model}. Error message: {e}")
-            continue
+            print(f"Error decoding JSON response. Error message: {e}")
+            return  # or exit the function, depending on your requirements
 
         # Add the responses to the dictionary for all models
         all_responses[model] = responses
