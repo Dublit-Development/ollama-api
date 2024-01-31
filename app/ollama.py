@@ -42,12 +42,11 @@ def run_model_question(question, context):
         result = subprocess.run(curl_command, shell=True, capture_output=True, text=True)
         output = result.stdout
 
+        # Print the output for debugging
+        print("Raw Output:", output)
         # Process the output as JSON and extract "response" values
         responses = [json.loads(response)["response"] for response in output.strip().split('\n')]
 
-        # Print the output for debugging
-        print("Raw Output:", output)
-        
         # Add the responses to the dictionary for all models
         all_responses[model] = responses
 
