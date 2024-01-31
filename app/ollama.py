@@ -21,7 +21,6 @@ def listModels():
 result = listModels()
 print(result)
 
-Dutch = "The Dutch East India Company was a massive corporation."
 
 def run_model_question(question, context):
     # Get the list of installed models (replace listInstalledModels with the correct function)
@@ -37,7 +36,7 @@ def run_model_question(question, context):
 
         # Define the curl command for each model
         curl_command = f'curl http://localhost:11434/api/generate -d \'{{"model": "{model}", "prompt": "{quoted_question}", "context": "{quoted_context}"}}\''
-        
+
         # Run the command and capture the output
         process = subprocess.Popen(curl_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = process.communicate()
@@ -60,5 +59,5 @@ def run_model_question(question, context):
     return all_responses
 
 # Run the question for all installed models
-results = run_model_question("What is the Dutch East India Company?", Dutch)
+results = run_model_question("What is the Dutch East India Company?", "The Dutch East India Company...")
 print(results)
