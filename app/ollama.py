@@ -22,7 +22,7 @@ result = listModels()
 print(result)
 
 
-def run_model_question(question, context):
+def run_model_question(question, content):
     # Get the list of installed models (replace listInstalledModels with the correct function)
     model_names = listInstalledModels()
 
@@ -32,20 +32,20 @@ def run_model_question(question, context):
     for model in model_names:
         # Use shlex.quote for question and context to handle special characters
         quoted_question = shlex.quote(question)
-        quoted_context = shlex.quote(context)
+        quoted_content = shlex.quote(content)
         
         # Define the data payload as a dictionary
         data_payload = {
             "model": model,
             "prompt": quoted_question,
-            "context": []
+            "content": quoted_content
         }
 
         # Convert the data payload to a JSON string
         json_data = json.dumps(data_payload)
 
         # Run the command and capture the output
-        process = subprocess.Popen(['curl', 'http://localhost:11434/api/generate', '-d', json_data],
+        process = subprocess.Popen(['curl', 'http://localhost:11434/api/chat', '-d', json_data],
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = process.communicate()
         
