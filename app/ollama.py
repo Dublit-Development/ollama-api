@@ -131,25 +131,6 @@ Statistically, the VOC eclipsed all of its rivals in the Asia trade. Between 160
 
 Having been set up in 1602 to profit from the Malukan spice trade, the VOC established a capital in the port city of Jayakarta in 1609 and changed its name to Batavia (now Jakarta). Over the next two centuries the company acquired additional ports as trading bases and safeguarded their interests by taking over surrounding territory.[12] It remained an important trading concern and paid an 18% annual dividend for almost 200 years. Much of the labour that built its colonies was from people it had enslaved.
 
-Weighed down by smuggling, corruption and growing administrative costs in the late 18th century, the company went bankrupt and was formally dissolved in 1799. Its possessions and debt were taken over by the government of the Dutch Batavian Republic.
-
-Company name, logo, and flag
-
-17th-century plaque to the [Dutch] United East India Company (the VOC), Hoorn
-
-The logo of the Amsterdam Chamber of the VOC
-In Dutch, the name of the company was the Vereenigde Nederlandsche Geoctroyeerde Oostindische Compagnie (abbreviated as the VOC), literally the 'United Dutch Chartered East India Company' (the United East India Company).[13] The company's monogram logo consisted of a large capital 'V' with an O on the left and a C on the right half and was possibly the first globally recognised corporate logo.[14] It appeared on various corporate items, such as cannons and coins. The first letter of the hometown of the chamber conducting the operation was placed on top. The monogram, versatility, flexibility, clarity, simplicity, symmetry, timelessness, and symbolism are considered notable characteristics of the VOC's professionally designed logo. Those elements ensured its success at a time when the concept of the corporate identity was virtually unknown.[14][15] An Australian vintner has used the VOC logo since the late 20th century, having re-registered the company's name for the purpose.[16]
-
-Around the world, and especially in English-speaking countries, the VOC is widely known as the 'Dutch East India Company'. The name 'Dutch East India Company' is used to make a distinction from the [British] East India Company (EIC) and other East Indian companies (such as the Danish East India Company, French East India Company, Portuguese East India Company, and the Swedish East India Company). The company's alternative names that have been used include the 'Dutch East Indies Company', 'United East India Company', 'Jan Company', or 'Jan Compagnie'.[17][18]
-
-History
-Origins
-See also: First Dutch Expedition to Indonesia, Second Dutch Expedition to Indonesia, and Voorcompagnie
-Further information: Spice trade and Cape Route
-Before the Dutch Revolt, which started in 1566/68, the Flemish city of Antwerp had played an important role as a distribution center in northern Europe. After 1591, the Portuguese used an international syndicate of the German Fugger family and Welser family, as well as Spanish and Italian firms, which operated out of Hamburg as the northern staple port to distribute their goods, thereby cutting Dutch merchants out of the trade. At the same time, the Portuguese trade system was unable to increase supply to satisfy growing demand, in particular the demand for pepper. Demand for spices was relatively inelastic; therefore, each lag in the supply of pepper caused a sharp rise in pepper prices.
-
-In 1580, the Portuguese crown was united in a personal union with the Spanish crown (called the Iberian Union), with which the Dutch Republic was at war. The Portuguese Empire thus became an appropriate target for Dutch military incursions. These factors motivated Dutch merchants to enter the intercontinental spice trade themselves. Further, a number of Dutch merchants and explorers, such as Jan Huyghen van Linschoten and Cornelis de Houtman, went on to obtain firsthand knowledge of the "secret" Portuguese trade routes and practices that were already in place, thereby providing further opportunity for the Dutch to enter the trade.[19]
-
-The stage was thus set for Dutch expeditions to the Indonesian islands, beginning with James Lancaster in 1591, Cornelis de Houtman in 1595 and again in 1598, Jacob Van Neck in 1598, Lancaster again in 1601, among others. During the four-ship exploratory expedition by Frederick de Houtman in 1595 to Banten, the main pepper port of West Java, the crew clashed with both Portuguese and indigenous Javanese. Houtman's expedition then sailed east along the north coast of Java, losing twelve crew members to a Javanese attack at Sidayu and killing a local ruler in Madura. Half the crew were lost before the expedition made it back to the Netherlands the following year, but with enough spices to make a considerable profit.[20]""")
+Weighed down by smuggling, corruption and growing administrative costs in the late 18th century, the company went bankrupt and was formally dissolved in 1799. Its possessions and debt were taken over by the government of the Dutch Batavian Republic.""")
 
 print(results)
