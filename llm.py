@@ -6,3 +6,4 @@ response = completion(
             api_base="http://localhost:11434"
 )
 
+print(response)
