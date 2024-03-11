@@ -5,3 +5,4 @@ torch
 diffusers
 transformers
 accelerate
+litellm
