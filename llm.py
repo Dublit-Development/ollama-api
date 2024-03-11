@@ -8,7 +8,12 @@ response = completion(
                          What is the most appropriate lender? Let us add some additional parameters.  The applicant also has a co-signer.  The co-signer has a score of 800 given that
                          that the applicant has a co-signer that will take priortiy credit score.  What is the most appropriate lender now? More data is coming in from our applicant and lenders.
                          Lenders now look out for self-employement.  Wells Fargo is lenient and willing to work with self-employement, Ally is not and Santandar is willing to as long as it is 
-                         within their desired credit score.  Both of the co-signers are self-employed.  Who is the most appropriate lender with all of this data?""","role": "user"}], 
+                         within their desired credit score.  Both of the co-signers are self-employed.  Who is the most appropriate lender with all of this data?
+                         
+                         Additional data is incoming. The maximum amount and minimum amount to finance for each lender varies.  Wells Fargo accepts a minimum of $10,000 and a maximum of
+                         $100,000.  Ally accepts a minimum of $5,000 and a maximum of $50,000. Santandar accepts a minimum of $2,000 and a maximum of $30,000.  It is important that the vehicle
+                         price is within range.  The user would like an SUV which starts at $40,000 a car at $10,000 and a Truck at $90,000.  What do you think is an applicable lender now?
+                          ""","role": "user"}], 
             api_base="http://localhost:11434"
 )
 
