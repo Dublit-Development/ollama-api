@@ -16,7 +16,9 @@ response = completion(
                          The car selection of the applicant is influential.  Given that the applicant prefers an SUV what would be the most appropriate lender?
                          
                          We also have another peice of data.  The applicant and the co-signer do not have Identificaiton.  Ally is not willing to work with applicants with no ID, Sandtandar likewise
-                         however Wells Fargo will allow for a applicants with no ID.  What would be the most appropriate choice?""","role": "user"}], 
+                         however Wells Fargo will allow for a applicants with no ID.  What would be the most appropriate choice?  The applicant is self-employed at Uber and Lyft.  Our lenders
+                         are very specific working with this type of employement.  Wells Fargo and Ally accept Uber and Lyft as viable options of employement however Santandar does not.  How does that
+                         impact our choice?""","role": "user"}], 
             api_base="http://localhost:11434"
 )
 
