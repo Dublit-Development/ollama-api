@@ -34,6 +34,7 @@ class Prompt:
                             The applicant has an amount to finance of {self.amtFinance}.
                             The applicant has or has not filed for chapter 7 bankrupcy? {self.ch7}.
                             The applicant has or has not filed for chapter 13 bankrupcy? {self.ch13}.
+                            The applicant has a multiple jobs without a timeframe.
                             """
 
     def lender_prompt(self):
