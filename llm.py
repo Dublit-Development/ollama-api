@@ -3,7 +3,7 @@ import json
 
 def llm_query(applicantPrompt, allyPrompt, santandarPrompt, wellFargo, capitalOne, questionPrompt):
     response = completion(
-                model="ollama/gemma:7b", 
+                model="ollama/starling-lm", 
                 messages = [{ "content": f"""  The applicant has provided the following information {applicantPrompt}. {questionPrompt}
                              Here are the lenders and information. {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}.""","role": "user"}], 
                 api_base="http://localhost:11434"
@@ -84,6 +84,6 @@ santandar = Prompt('Santandar', "Joseph", 500, 25000, "True", "No")
 wellsFargo = Prompt('WellsFargo', "Joseph", 500, 25000, "True", "No")
 CapitalOne = Prompt('CapitalOne', "Joseph", 500, 25000, "True", "No")
 
-print(ally)
+print(ally.applicant_prompt())
 
 print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), santandarPrompt=santandar.lender_prompt(), wellFargo=wellsFargo.lender_prompt(), capitalOne=CapitalOne.lender_prompt(), questionPrompt=ally.question_prompt()))
