@@ -79,7 +79,7 @@ class Prompt:
         return lenderPrompt 
     
     def question_prompt(self):
-        questionPrompt = """What is the best lender for this applicant based on the criteria of the applicant and lenders provided?"""
+        questionPrompt = """What is the best lender for this applicant based on the criteria of the applicant and lenders provided? Remember if the applicant does not meet the credit score requirement or is a ghost they should not be reccomended for the lender if the lender does not accept ghosts."""
 
         return questionPrompt
     
