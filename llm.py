@@ -3,7 +3,7 @@ import json
 
 def llm_query(applicantPrompt, allyPrompt, santandarPrompt, wellFargo, capitalOne, questionPrompt):
     response = completion(
-                model="ollama/llama2", 
+                model="ollama/starling-lm", 
                 messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}, {questionPrompt}""","role": "user"}], 
                 api_base="http://localhost:11434"
     )
