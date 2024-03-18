@@ -1,25 +1,91 @@
 from litellm import completion
+import json
 
-response = completion(
-            model="ollama/llama2", 
-            messages = [{ "content": """Hello,  How are you?.  You are going to be a financial analyst bot for a Automotive Company.  You need to make a selection of the most
-                         appropriate lender given a applicant and his/her credit score and other details.  In the first example we will have a applicant with a credit score of 600 and three
-                         lenders to choose from.  Wells Fargo accepts a credit score of 500,  Ally accepts a credit score of 600 and Santandar accepts a credit score of 800. 
-                         What is the most appropriate lender? Let us add some additional parameters.  The applicant also has a co-signer.  The co-signer has a score of 800 given that
-                         that the applicant has a co-signer that will take priortiy credit score.  What is the most appropriate lender now? More data is coming in from our applicant and lenders.
-                         Lenders now look out for self-employement.  Wells Fargo is lenient and willing to work with self-employement, Ally is not and Santandar is willing to as long as it is 
-                         within their desired credit score.  Both of the co-signers are self-employed.  Who is the most appropriate lender with all of this data?
-                         
-                         Additional data is incoming. The maximum amount and minimum amount to finance for each lender varies.  Wells Fargo accepts a minimum of $10,000 and a maximum of
-                         $100,000.  Ally accepts a minimum of $5,000 and a maximum of $50,000. Santandar accepts a minimum of $2,000 and a maximum of $30,000.  It is important that the vehicle
-                         price is within range.  The user would like an SUV which starts at $40,000 a car at $10,000 and a Truck at $90,000.  What do you think is an applicable lender now?
-                         The car selection of the applicant is influential.  Given that the applicant prefers an SUV what would be the most appropriate lender?
-                         
-                         We also have another peice of data.  The applicant and the co-signer do not have Identificaiton.  Ally is not willing to work with applicants with no ID, Sandtandar likewise
-                         however Wells Fargo will allow for a applicants with no ID.  What would be the most appropriate choice?  The applicant is self-employed at Uber and Lyft.  Our lenders
-                         are very specific working with this type of employement.  Wells Fargo and Ally accept Uber and Lyft as viable options of employement however Santandar does not.  How does that
-                         impact our choice?""","role": "user"}], 
-            api_base="http://localhost:11434"
-)
+def llm_query(applicantPrompt, allyPrompt, questionPrompt):
+    response = completion(
+                model="ollama/llama2", 
+                messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {questionPrompt}""","role": "user"}], 
+                api_base="http://localhost:11434"
+    )
 
-print(response)
+    return response
+
+class Prompt:
+    lenders_info_filename = './data/lenders_info.json'
+
+    def __init__(self, lender_name, name, creditScore, amountToFinance, chapter7, chapter13):
+        self.lender = lender_name
+        self.creditScore = creditScore
+        self.amtFinance = amountToFinance
+        self.ch7 = chapter7
+        self.ch13 = chapter13
+        self.name = name
+        self.load_data()
+
+    def load_data(self):
+        with open(self.lenders_info_filename, 'r') as file:
+            self.info_data = json.load(file)
+
+    def applicant_prompt(self):
+        applicantPrompt = "You are a financial loan assistant at an automotive company,  this prompt is the applicant data to choose the best lender."
+
+        applicantPrompt += f"""{self.name} is looking to find the most suitable lender and has provided criteria for the process.  
+                            The applicant has a credit score of {self.creditScore}.
+                            The applicant has an amount to finance of {self.amtFinance}.
+                            The applicant has or has not filed for chapter 7 bankrupcy? {self.ch7}.
+                            The applicant has or has not filed for chapter 13 bankrupcy? {self.ch13}.
+                            """
+
+    def lender_prompt(self):
+        lenderPrompt = '''You are a financial loan assistant at an automotive company.  Your purpose is to assist in finding the most appropriate lender for an applicant.'''
+        
+        creditRange = self.info_data[self.lender]["CreditRange"]
+        FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
+        Ghosts = self.info_data[self.lender]["Ghosts"]
+        Identification = self.info_data[self.lender]["Identification"]
+        SecondJobTime = self.info_data[self.lender]["SecondJobTime"]
+        SecondAutomotive = self.info_data[self.lender]["SecondAutomotive"]
+        Chapter7 = self.info_data[self.lender]["Chapter7"]
+        Chapter13 = self.info_data[self.lender]["Chapter13"]
+        FinanceRange = self.info_data[self.lender]["FinanceRange"]
+        TemporaryJobs = self.info_data[self.lender]["TemporaryJobs"]
+        UberorLyft = self.info_data[self.lender]["UberorLyft"]
+        Niche = self.info_data[self.lender]["Niche"]
+        Niche1 = self.info_data[self.lender]["Niche1"]
+        Niche2 = self.info_data[self.lender]["Niche2"]
+        Niche3 = self.info_data[self.lender]["Niche3"]
+        Niche4 = self.info_data[self.lender]["Niche4"]
+        Niche5 = self.info_data[self.lender]["Niche5"]
+        Niche6 = self.info_data[self.lender]["Niche6"]
+        Watchout = self.info_data[self.lender]["Watchout"]
+        Watchout1 = self.info_data[self.lender]["Watchout1"]
+        Watchout2 = self.info_data[self.lender]["Watchout2"]
+
+        lenderPrompt += f'''
+                    {self.lender} is willing to work within a credit range of {creditRange}.
+                    Does {self.lender} accept first-time buyers? {FirstTimeBuyers}.
+                    Does {self.lender} accept Ghosts applicants without a credit score? {Ghosts}.
+                    Does {self.lender} require Identification? {Identification}.
+                    Does {self.lender} allow for secondary jobs as income? {SecondJobTime}.
+                    Does {self.lender} allow for a second automotive loan? {SecondAutomotive}.
+                    Does {self.lender} allow for Chapter 7 Bankrupcy? {Chapter7}.
+                    Does {self.lender} allow for Chapter 13 Bankrupcy? {Chapter13}.
+                    {self.lender} has a finance range of {FinanceRange}.
+                    Does {self.lender} allow for temporary jobs? {TemporaryJobs}.
+                    Does {self.lender} accept Uber or Lyft as employment? {UberorLyft}.
+                    {self.lender} extremly prefers applicants with the following six niches, {Niche}, {Niche1}, {Niche2}, {Niche3}, {Niche4}, {Niche5} and {Niche6}.
+                    {self.lender} does not accept applicants with {Watchout}, {Watchout1} and {Watchout2}.
+                    '''
+        
+        return lenderPrompt 
+    
+    def question_prompt(self):
+        questionPrompt = """What is the best lender for this applicant based on the criteria of the applicant and lenders provided?"""
+
+        return questionPrompt
+    
+
+ally = Prompt('Ally',"Joseph",700,40000,"No","No")
+
+
+llm_query(applicantPrompt=ally.applicant_prompt, allyPrompt=ally.lender_prompt, questionPrompt=ally.question_prompt)
