@@ -1,10 +1,10 @@
 from litellm import completion
 import json
 
-def llm_query(applicantPrompt, allyPrompt, santandarPrompt, questionPrompt):
+def llm_query(applicantPrompt, allyPrompt, santandarPrompt, wellFargo, capitalOne, questionPrompt):
     response = completion(
                 model="ollama/llama2", 
-                messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {santandarPrompt}, {questionPrompt}""","role": "user"}], 
+                messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}, {questionPrompt}""","role": "user"}], 
                 api_base="http://localhost:11434"
     )
 
@@ -84,9 +84,11 @@ class Prompt:
         return questionPrompt
     
 
-ally = Prompt('Ally',"Joseph",700,40000,"No","No")
-santandar = Prompt('Santandar', "Joseph", 700, 40000, "No", "No")
+ally = Prompt('Ally',"Joseph",0,40000,"No","No")
+santandar = Prompt('Santandar', "Joseph", 0, 40000, "No", "No")
+wellsFargo = Prompt('WellsFargo', "Joseph", 0, 40000, "No", "No")
+CapitalOne = Prompt('CapitalOne', "Joseph", 0, 40000, "No", "No")
 
 print(ally)
 
-print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), santandarPrompt=santandar.lender_prompt(), questionPrompt=ally.question_prompt()))
+print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), santandarPrompt=santandar.lender_prompt(), wellFargo=wellsFargo.lender_prompt(), capitalOne=CapitalOne.lender_prompt(), questionPrompt=ally.question_prompt()))
