@@ -33,8 +33,8 @@ class Prompt:
         applicantPrompt += f"""{self.name} is looking to find the most suitable lender and has provided criteria for the process.  
                             The applicant has a credit score of {self.creditScore}.
                             The applicant has an amount to finance of {self.amtFinance}.
-                            The applicant has or has not filed for chapter 7 bankrupcy? {self.ch7}.
-                            The applicant has or has not filed for chapter 13 bankrupcy? {self.ch13}.
+                            Has the applicant filed for chapter 7? {self.ch7}.
+                            Has the applicant filed for chapter 13? {self.ch13}.
                             """
         return applicantPrompt
 
@@ -42,14 +42,14 @@ class Prompt:
         lenderPrompt = '''You are a financial loan assistant at an automotive company.  Your purpose is to assist in finding the most appropriate lender for an applicant.'''
         
         creditRange = self.info_data[self.lender]["CreditRange"]
-        # FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
+        FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
         Ghosts = self.info_data[self.lender]["Ghosts"]
         # Identification = self.info_data[self.lender]["Identification"]
-        # SecondJobTime = self.info_data[self.lender]["SecondJobTime"]
+        SecondJobTime = self.info_data[self.lender]["SecondJobTime"]
         SecondAutomotive = self.info_data[self.lender]["SecondAutomotive"]
-        # Chapter7 = self.info_data[self.lender]["Chapter7"]
-        # Chapter13 = self.info_data[self.lender]["Chapter13"]
-        # FinanceRange = self.info_data[self.lender]["FinanceRange"]
+        Chapter7 = self.info_data[self.lender]["Chapter7"]
+        Chapter13 = self.info_data[self.lender]["Chapter13"]
+        FinanceRange = self.info_data[self.lender]["FinanceRange"]
         TemporaryJobs = self.info_data[self.lender]["TemporaryJobs"]
         UberorLyft = self.info_data[self.lender]["UberorLyft"]
         Niche = self.info_data[self.lender]["Niche"]
@@ -65,6 +65,9 @@ class Prompt:
 
         lenderPrompt += f'''n\n\{self.lender} is willing to work within a credit range of {creditRange}.
                     Does {self.lender} accept Ghosts applicants without a credit score? {Ghosts}.
+                    Does {self.lender} accept first time buyers? {FirstTimeBuyers}.
+                    Does {self.lender} accept a history of chapter 7 bankrupcy? {Chapter7}.
+                    Does {self.lender} accept a history of chapter 13 banktupcy? {Chapter13}
                     Does {self.lender} allow for a second automotive loan? {SecondAutomotive}.
                     Does {self.lender} allow for temporary jobs? {TemporaryJobs}.
                     Does {self.lender} accept Uber or Lyft as employment? {UberorLyft}.
@@ -80,7 +83,7 @@ class Prompt:
         return questionPrompt
     
 
-ally = Prompt('Ally',"Joseph",500, 25000,"True","No")
+ally = Prompt('Ally',"Joseph",750, 25000,"True","False")
 santandar = Prompt('Santandar', "Joseph", 500, 25000, "True", "No")
 wellsFargo = Prompt('WellsFargo', "Joseph", 500, 25000, "True", "No")
 CapitalOne = Prompt('CapitalOne', "Joseph", 500, 25000, "True", "No")
