@@ -1,10 +1,10 @@
 from litellm import completion
 import json
 
-def llm_query(applicantPrompt, allyPrompt, questionPrompt):
+def llm_query(applicantPrompt, allyPrompt, santandarPrompt, questionPrompt):
     response = completion(
                 model="ollama/llama2", 
-                messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {questionPrompt}""","role": "user"}], 
+                messages = [{ "content": f"""{applicantPrompt}. {allyPrompt}, {santandarPrompt}, {questionPrompt}""","role": "user"}], 
                 api_base="http://localhost:11434"
     )
 
@@ -85,7 +85,8 @@ class Prompt:
     
 
 ally = Prompt('Ally',"Joseph",700,40000,"No","No")
+santandar = Prompt('Santandar', "Joseph", 700, 40000, "No", "No")
 
 print(ally)
 
-print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), questionPrompt=ally.question_prompt()))
+print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), santandarPrompt=santandar.lender_prompt(), questionPrompt=ally.question_prompt()))
