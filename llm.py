@@ -3,7 +3,7 @@ import json
 
 def llm_query(applicantPrompt, allyPrompt, santandarPrompt, wellFargo, capitalOne, questionPrompt):
     response = completion(
-                model="ollama/starling-lm", 
+                model="ollama/gemma:7b", 
                 messages = [{ "content": f""" Here are the lenders and information. {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}.  The applicant has provided 
                              the following information {applicantPrompt}. {questionPrompt}""","role": "user"}], 
                 api_base="http://localhost:11434"
