@@ -41,14 +41,14 @@ class Prompt:
         lenderPrompt = '''You are a financial loan assistant at an automotive company.  Your purpose is to assist in finding the most appropriate lender for an applicant.'''
         
         creditRange = self.info_data[self.lender]["CreditRange"]
-        FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
+        # FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
         Ghosts = self.info_data[self.lender]["Ghosts"]
-        Identification = self.info_data[self.lender]["Identification"]
-        SecondJobTime = self.info_data[self.lender]["SecondJobTime"]
+        # Identification = self.info_data[self.lender]["Identification"]
+        # SecondJobTime = self.info_data[self.lender]["SecondJobTime"]
         SecondAutomotive = self.info_data[self.lender]["SecondAutomotive"]
-        Chapter7 = self.info_data[self.lender]["Chapter7"]
-        Chapter13 = self.info_data[self.lender]["Chapter13"]
-        FinanceRange = self.info_data[self.lender]["FinanceRange"]
+        # Chapter7 = self.info_data[self.lender]["Chapter7"]
+        # Chapter13 = self.info_data[self.lender]["Chapter13"]
+        # FinanceRange = self.info_data[self.lender]["FinanceRange"]
         TemporaryJobs = self.info_data[self.lender]["TemporaryJobs"]
         UberorLyft = self.info_data[self.lender]["UberorLyft"]
         Niche = self.info_data[self.lender]["Niche"]
@@ -63,14 +63,8 @@ class Prompt:
         Watchout2 = self.info_data[self.lender]["Watchout2"]
 
         lenderPrompt += f'''n\n\{self.lender} is willing to work within a credit range of {creditRange}.
-                    Does {self.lender} accept first-time buyers? {FirstTimeBuyers}.
                     Does {self.lender} accept Ghosts applicants without a credit score? {Ghosts}.
-                    Does {self.lender} require Identification? {Identification}.
-                    Does {self.lender} allow for secondary jobs as income? {SecondJobTime}.
                     Does {self.lender} allow for a second automotive loan? {SecondAutomotive}.
-                    Does {self.lender} allow for Chapter 7 Bankrupcy? {Chapter7}.
-                    Does {self.lender} allow for Chapter 13 Bankrupcy? {Chapter13}.
-                    {self.lender} has a finance range of {FinanceRange}.
                     Does {self.lender} allow for temporary jobs? {TemporaryJobs}.
                     Does {self.lender} accept Uber or Lyft as employment? {UberorLyft}.
                     {self.lender} extremly prefers applicants with the following six niches, {Niche}, {Niche1}, {Niche2}, {Niche3}, {Niche4}, {Niche5} and {Niche6}.
