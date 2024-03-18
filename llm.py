@@ -88,4 +88,4 @@ ally = Prompt('Ally',"Joseph",700,40000,"No","No")
 
 print(ally)
 
-# print(llm_query(applicantPrompt=ally.applicant_prompt, allyPrompt=ally.lender_prompt, questionPrompt=ally.question_prompt))
+print(llm_query(applicantPrompt=ally.applicant_prompt(), allyPrompt=ally.lender_prompt(), questionPrompt=ally.question_prompt()))
