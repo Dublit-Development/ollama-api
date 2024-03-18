@@ -84,7 +84,7 @@ class Prompt:
         return questionPrompt
     
 
-ally = Prompt('Ally',"Joseph",750, 25000,"True","False")
+ally = Prompt('Ally',"Joseph",750, 25000,"False","False")
 santandar = Prompt('Santandar', "Joseph", 500, 25000, "True", "No")
 wellsFargo = Prompt('WellsFargo', "Joseph", 500, 25000, "True", "No")
 CapitalOne = Prompt('CapitalOne', "Joseph", 500, 25000, "True", "No")
