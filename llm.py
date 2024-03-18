@@ -61,8 +61,7 @@ class Prompt:
         Watchout1 = self.info_data[self.lender]["Watchout1"]
         Watchout2 = self.info_data[self.lender]["Watchout2"]
 
-        lenderPrompt += f'''
-                    {self.lender} is willing to work within a credit range of {creditRange}.
+        lenderPrompt += f'''n\n\{self.lender} is willing to work within a credit range of {creditRange}.
                     Does {self.lender} accept first-time buyers? {FirstTimeBuyers}.
                     Does {self.lender} accept Ghosts applicants without a credit score? {Ghosts}.
                     Does {self.lender} require Identification? {Identification}.
@@ -75,7 +74,7 @@ class Prompt:
                     Does {self.lender} accept Uber or Lyft as employment? {UberorLyft}.
                     {self.lender} extremly prefers applicants with the following six niches, {Niche}, {Niche1}, {Niche2}, {Niche3}, {Niche4}, {Niche5} and {Niche6}.
                     {self.lender} does not accept applicants with {Watchout}, {Watchout1} and {Watchout2}.
-                    '''
+                    \n\n'''
         
         return lenderPrompt 
     
