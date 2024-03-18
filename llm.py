@@ -3,9 +3,9 @@ import json
 
 def llm_query(applicantPrompt, allyPrompt, santandarPrompt, wellFargo, capitalOne, questionPrompt):
     response = completion(
-                model="ollama/starling-lm", 
-                messages = [{ "content": f"""  The applicant has provided the following information {applicantPrompt}. {questionPrompt}
-                             Here are the lenders and information. {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}.""","role": "user"}], 
+                model="ollama/gemma:7b", 
+                messages = [{ "content": f"""  The applicant has provided the following information {applicantPrompt}. {questionPrompt}.
+                {allyPrompt}, {santandarPrompt}, {wellFargo}, {capitalOne}.""","role": "user"}], 
                 api_base="http://localhost:11434"
     )
 
@@ -39,7 +39,7 @@ class Prompt:
         return applicantPrompt
 
     def lender_prompt(self):
-        lenderPrompt = '''You are a financial loan assistant at an automotive company.  Your purpose is to assist in finding the most appropriate lender for an applicant.'''
+        lenderPrompt = '''Here are the prompts of each lender and criteria they look for.'''
         
         creditRange = self.info_data[self.lender]["CreditRange"]
         FirstTimeBuyers = self.info_data[self.lender]["FirstTimeBuyers"]
@@ -78,7 +78,8 @@ class Prompt:
         return lenderPrompt 
     
     def question_prompt(self):
-        questionPrompt = """What is the best lender for this applicant based on the criteria of the applicant and lenders provided? Remember if the applicant does not meet the credit score requirement or is a ghost they should not be reccomended for the lender if the lender does not accept ghosts."""
+        questionPrompt = """What is the most appropriate lender for the applicant based on the information provided?  Be sure to take into consideration all of the lender data and make a decision that could
+        be supported by the data provided."""
 
         return questionPrompt
     
