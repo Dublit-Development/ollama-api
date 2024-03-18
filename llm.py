@@ -36,6 +36,7 @@ class Prompt:
                             The applicant has or has not filed for chapter 7 bankrupcy? {self.ch7}.
                             The applicant has or has not filed for chapter 13 bankrupcy? {self.ch13}.
                             """
+        return applicantPrompt
 
     def lender_prompt(self):
         lenderPrompt = '''You are a financial loan assistant at an automotive company.  Your purpose is to assist in finding the most appropriate lender for an applicant.'''
